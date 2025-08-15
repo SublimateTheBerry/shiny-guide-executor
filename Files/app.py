@@ -176,8 +176,6 @@ def main():
         profile_title = f"StyxΠΡΟΞΙ | *{i+1} 📍"
         encoded_title = base64.b64encode(profile_title.encode()).decode()
         custom_fixed_text = f"""#profile-title: base64:{encoded_title}
-#profile-update-interval: 1
-#subscription-userinfo: upload=29; download=12; total=10737418239000000; expire=2546249523
 #support-url: https://t.me/styxproxy_bot
 #profile-web-page-url: https://t.me/styxproxy_bot
 """

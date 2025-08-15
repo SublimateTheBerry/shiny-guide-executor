@@ -1,0 +1,43 @@
+name: Update Configs
+permissions: write-all
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "*/18 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: cd Files && pip install -r requirements.txt
+
+    - name: Run Python script and save output to file
+      run: cd Files && python app.py
+      
+    - name: Run Splitter script and save output to file
+      run: cd Files && python sort.py
+
+    - name: Push, push, push!
+      run: |
+          git config --global user.name "SublimateTheBerry"
+          git config --global user.email "nepan.8066@gmail.com"
+          git remote remove origin
+          git remote add origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/SublimateTheBerry/proxy-list-private.git
+          git checkout -B main
+          git add .
+          git commit -m "залив" || echo "No changes to commit"
+          git push origin main
+

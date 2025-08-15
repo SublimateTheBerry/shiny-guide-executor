@@ -37,7 +37,7 @@ jobs:
 
     - name: Copy generated files
       run: |
-        cp -r $(ls | grep -v 'Files\|.git\|.github') private-repo/
+        cp -r $(ls | grep -v 'Files\|.git\|.github\|private-repo') private-repo/
 
     - name: Commit & Push
       run: |
